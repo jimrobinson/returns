@@ -17,10 +17,10 @@ import (
 // be skipped because they pertain to growth or losses of
 // a fund distinct from contributions or withdrawals.
 var skip_payee = []string{
-	"Dividend",
-	"Gain",
-	"Fee",
-	"Adjustment",
+	"dividend",
+	"gain",
+	"fee",
+	"adjustment",
 }
 
 // balance returns the account balances of the
@@ -227,7 +227,7 @@ func accounts(start, stop time.Time) (accounts Accounts, err error) {
 		// matches an entry in skip_payee
 		skip := false
 		for _, v := range skip_payee {
-			if strings.Index(payee, v) != -1 {
+			if strings.Index(strings.ToLower(payee), v) != -1 {
 				skip = true
 				break
 			}
