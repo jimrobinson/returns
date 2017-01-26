@@ -154,7 +154,8 @@ func main() {
 			return
 		}
 
-		fmt.Printf("%6.2f%%\t%12s\n",
+		fmt.Printf("%12s\t%6.2f%%\t%12s\n",
+			account.Opening.Dollars(true),
 			xirr*100.0, account.Closing.Dollars(true))
 		sort.Sort(names)
 		for i := range names {
@@ -198,8 +199,10 @@ func main() {
 				continue
 			}
 
-			fmt.Printf("%6.2f%%\t%12s\t%s\n",
-				xirr*100.0, account.Closing.Dollars(true), account.Name)
+			fmt.Printf("%12s\t%6.2f%%\t%12s\t%s\n",
+				account.Opening.Dollars(true),
+				xirr*100.0, account.Closing.Dollars(true),
+				account.Name)
 			if *verbose {
 				for _, entry := range account.Entries() {
 					fmt.Printf("\t%s\t%12s\t%s\n",
