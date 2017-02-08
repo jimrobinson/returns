@@ -16,7 +16,7 @@ var merge *bool = flag.Bool("m", false, "merge cashflows")
 var alltime *bool = flag.Bool("a", false, "calculate returns over all time")
 var begin *string = flag.String("b", time.Now().Add(-time.Hour*24*30*3).Format("2006-01-02"), "reporting start date")
 var end *string = flag.String("e", time.Now().Format("2006-01-02"), "reporting end date")
-var period *string = flag.String("p", fmt.Sprintf("%d", time.Now().Format("2001")), "reporting period (default: current year)")
+var period *string = flag.String("p", "", "reporting period (e.g., 2010, 2010-01)")
 
 func usage() {
 	fmt.Fprintf(os.Stderr, "usage: %s [-v] [-m] [<substring> ...]\n", os.Args[0])
