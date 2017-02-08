@@ -13,7 +13,10 @@ type Entry struct {
 	Payee  string
 }
 
-func (e Entry) Dollars(positive bool) string {
+func (e *Entry) Dollars(positive bool) string {
+	if (e == nil) {
+		return "$0.00";
+	}
 
 	var str []string
 	if positive && 0 > e.Amount {
