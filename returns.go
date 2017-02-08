@@ -14,7 +14,7 @@ var verbose *bool = flag.Bool("v", false, "print cashflows")
 var merge *bool = flag.Bool("m", false, "merge cashflows")
 
 var alltime *bool = flag.Bool("a", false, "calculate returns over all time")
-var begin *string = flag.String("b", fmt.Sprintf("%s-01", time.Now().Add(-time.Hour*24*30*3).Format("2006-01")), "reporting start date")
+var begin *string = flag.String("b", time.Now().Add(-time.Hour*24*30*3).Format("2006-01-02"), "reporting start date")
 var end *string = flag.String("e", time.Now().Format("2006-01-02"), "reporting end date")
 var period *string = flag.String("p", fmt.Sprintf("%d", time.Now().Format("2001")), "reporting period (default: current year)")
 
