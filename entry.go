@@ -14,8 +14,8 @@ type Entry struct {
 }
 
 func (e *Entry) Dollars(positive bool) string {
-	if (e == nil) {
-		return "$0.00";
+	if e == nil {
+		return "$0.00"
 	}
 
 	var str []string

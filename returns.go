@@ -47,10 +47,24 @@ func main() {
 					*end = dt.Add(time.Hour * 24).Format("2006-01-02")
 				case 1:
 					*begin = dt.Format("2006-01-02")
-					*end = dt.Add(time.Hour*24*31).Format("2006-01") + "-01"
+					if dt.Month() == 12 {
+						*end = fmt.Sprintf("%04d-01-01", dt.Year()+1)
+					} else {
+						*end = fmt.Sprintf("%04d-%02d-01", dt.Year(), dt.Month()+1)
+					}
 				case 2:
-					*begin = dt.Format("2006-01-02")
-					*end = dt.Add(time.Hour*24*366).Format("2006") + "-01-01"
+					now := time.Now()
+					if dt.Format("2006") == now.Format("2006") {
+						*begin = dt.Format("2006-01-") + "01"
+						if now.Month() == 12 {
+							*end = fmt.Sprintf("%04d-01-01", now.Year()+1)
+						} else {
+							*end = fmt.Sprintf("%04d-%02d-01", now.Year(), now.Month()+1)
+						}
+					} else {
+						*begin = dt.Format("2006-01-") + "01"
+						*end = fmt.Sprintf("%04d-01-01", dt.Year()+1)
+					}
 				}
 				break
 			}
@@ -154,7 +168,6 @@ func main() {
 			return
 		}
 
-
 		fmt.Printf("%s - %s:\n", start.Format("2006-01-02"), stop.Format("2006-01-02"))
 		fmt.Printf("%12s\t%6.2f%%\t%12s\n",
 			account.Opening.Dollars(true),
@@ -201,7 +214,7 @@ func main() {
 				continue
 			}
 
-			if (i == 1) {
+			if i == 1 {
 				fmt.Printf("%s - %s:\n", start.Format("2006-01-02"), stop.Format("2006-01-02"))
 			}
 			fmt.Printf("%12s\t%6.2f%%\t%12s\t%s\n",

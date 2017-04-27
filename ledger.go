@@ -76,7 +76,6 @@ func balance(start, stop time.Time) (Accounts, error) {
 			if err != nil {
 				return nil, err
 			}
-			entry.Amount = entry.Amount
 			entry.Payee = "Opening Balance"
 
 			account := new(Account)
