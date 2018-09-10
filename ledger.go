@@ -150,6 +150,23 @@ func balance(start, stop time.Time) (Accounts, error) {
 		buf.Reset()
 	}
 
+	for _, v := range accounts {
+		if v.Opening != nil && v.Closing == nil {
+			entry := new(Entry)
+			entry.Time = stop
+			entry.Amount = 0
+			entry.Payee = "Closing Balance"
+			v.Closing = entry
+		}
+		if v.Opening == nil && v.Closing != nil {
+			entry := new(Entry)
+			entry.Time = start
+			entry.Amount = 0
+			entry.Payee = "Opening Balance"
+			v.Opening = entry
+		}
+	}
+
 	return accounts, nil
 }
 
